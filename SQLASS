@@ -1,0 +1,54 @@
+SELECT * FROM demo;-- Create Users Table
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(100) UNIQUE,
+    Password VARCHAR(255),
+    DateJoined DATE
+);
+
+-- Insert Data into Users Table
+INSERT INTO Users (UserID, FirstName, LastName, Email, Password, DateJoined) VALUES
+(1, 'John', 'Doe', 'john.doe@example.com', 'password123', '2022-01-01'),
+(2, 'Jane', 'Smith', 'jane.smith@example.com', 'password456', '2022-01-15'),
+(3, 'Alice', 'Johnson', 'alice.johnson@example.com', 'password789', '2022-02-10'),
+(4, 'Bob', 'Williams', 'bob.williams@example.com', 'passwordabc', '2022-03-05'),
+(5, 'Eve', 'Brown', 'eve.brown@example.com', 'passworddef', '2022-04-20');
+
+-- Create Properties Table
+CREATE TABLE Properties (
+    PropertyID INT PRIMARY KEY,
+    PropertyName VARCHAR(100),
+    Address VARCHAR(255),
+    Price DECIMAL(10, 2),
+    Description TEXT,
+    UserID INT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+-- Insert Data into Properties Table
+INSERT INTO Properties (PropertyID, PropertyName, Address, Price, Description, UserID) VALUES
+(1, 'Cozy Apartment', '123 Main St, City, State', 200000.00, 'A cozy apartment in the heart of the city.', 1),
+(2, 'Spacious House', '456 Elm St, City, State', 350000.00, 'A spacious house with a large backyard.', 2),
+(3, 'Luxury Condo', '789 Oak St, City, State', 500000.00, 'A luxurious condo with modern amenities.', 3),
+(4, 'Studio Apartment', '101 Pine St, City, State', 150000.00, 'A studio apartment with a beautiful view.', 4),
+(5, 'Family Home', '202 Maple St, City, State', 400000.00, 'A family home with multiple bedrooms.', 5);
+
+-- Create Mortgages Table
+CREATE TABLE Mortgages (
+    MortgageID INT PRIMARY KEY,
+    InterestRate DECIMAL(4, 2),
+    LoanTerm INT,
+    MonthlyPayment DECIMAL(10, 2),
+    PropertyID INT,
+    FOREIGN KEY (PropertyID) REFERENCES Properties(PropertyID)
+);
+
+-- Insert Data into Mortgages Table
+INSERT INTO Mortgages (MortgageID, InterestRate, LoanTerm, MonthlyPayment, PropertyID) VALUES
+(1, 3.50, 30, 1420.67, 1),
+(2, 4.25, 25, 1900.50, 2),
+(3, 3.75, 30, 2315.90, 3),
+(4, 4.00, 20, 1200.30, 4),
+(5, 3.90, 30, 1678.90, 5);
